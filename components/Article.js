@@ -117,20 +117,45 @@ const data = [
 function articleMaker(artObj) {
   const article = document.createElement("div");
   const titleOFArticle = document.createElement("h2");
-  const p = document.createElement("p");
+  const date = document.createElement("p");
+  const firstP = document.createElement("p");
+  const secondP = document.createElement("p");
+  const thirdP = document.createElement("p");
   const span = document.createElement("span");
 
   article.classList.add("article");
-  p.classList.add("date");
+  date.classList.add("date");
   span.classList.add("expandButton");
 
   article.appendChild(titleOFArticle);
-  article.appendChild(p);
+  article.appendChild(date);
+  article.appendChild(firstP);
+  article.appendChild(secondP);
+  article.appendChild(thirdP);
   article.appendChild(span);
 
   span.addEventListener("click", (event) => {
     article.classList.toggle("article-open");
   });
 
+  titleOFArticle.textContent = artObj.title;
+  date.textContent = artObj.date;
+  firstP.textContent = artObj.firstParagraph;
+  secondP.textContent = artObj.secondParagraph;
+  thirdP.textContent = artObj.thirdParagraph;
+  span.textContent = "+";
+
   return article;
 }
+
+const articleDiv = document.querySelector("div.articles");
+
+const articleElements = data.map((dataItem) => {
+  return articleMaker(dataItem);
+});
+
+console.log(articleElements);
+
+articleElements.forEach((articleElement) => {
+  articleDiv.appendChild(articleElement);
+});
